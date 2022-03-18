@@ -132,7 +132,15 @@ db.posts.insertMany([
 ## Find All Documents
 
 ```js
-db.posts.find()
+db.posts.find() // with cursor in 20th element
+db.posts.find().toArray() // all the data
+db.posts.find().forEach(data=>{printjson(data)}) // better than toArray() for large datasets, not loading data at once
+```
+
+## Projection - Selecting specific columns
+
+```js
+db.posts.find({}, {title:1}) // {title:1} means include, {title:0} means exclude 'title' column
 ```
 
 ## Find Documents with Query
@@ -259,3 +267,14 @@ db.posts.find({ views: { $gte: 7 } })
 db.posts.find({ views: { $lt: 7 } })
 db.posts.find({ views: { $lte: 7 } })
 ```
+
+## Data Types
+
+Text: 'Text'
+Boolean
+Number -> Integer(int32), NumberLong(int64), NumberDecimal
+ObjectId("asddad")
+ISODate("2022-02-02")
+Timestamp(11212123)
+Embedded Document / Object: {"a":{...}}
+Array: {"b":[...]} 
