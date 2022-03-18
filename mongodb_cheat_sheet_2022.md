@@ -269,7 +269,7 @@ db.posts.find({ views: { $lte: 7 } })
 ```
 
 ## Data Types
-
+```
 Text: 'Text'
 Boolean
 Number -> Integer(int32), NumberLong(int64), NumberDecimal
@@ -278,3 +278,4 @@ ISODate("2022-02-02")
 Timestamp(11212123)
 Embedded Document / Object: {"a":{...}}
 Array: {"b":[...]} 
+```
