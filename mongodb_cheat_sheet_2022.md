@@ -286,9 +286,9 @@ Array: {"b":[...]}
 db.posts.aggregate([{ 
   $lookup:{
     from: "authors", // from the tablename
-    localField:"authors", // column of reference
+    localField:"author", // column of reference
     foreignField: "_id", // foreign key
-    as:"authors", // alias for resultin column
+    as:"author", // alias for resultin column
   }
 }])
 
