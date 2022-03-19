@@ -279,3 +279,33 @@ Timestamp(11212123)
 Embedded Document / Object: {"a":{...}}
 Array: {"b":[...]} 
 ```
+
+## Relations 
+
+```js
+db.posts.aggregate([{ 
+  $lookup:{
+    from: "authors", // from the tablename
+    localField:"authors, // column of reference
+    foreignField: "_id", // foreign key
+    as:"authors", // alias for resultin column
+  }
+}])
+
+// Example posts - author (One to Many) & post - users - comments (Many to Many)
+{
+    _id: ObjectId("6230386bfb78d9a361b7edc4"),
+    title: 'Post 5 new',
+    body: 'Body of post.',
+    category: 'News',
+    likes: 8,
+    tags: [ 'news', 'events' ],
+    date: 'Tue Mar 15 2022 10:55:39 GMT+0400 (Azerbaijan Standard Time)',
+    author: ObjectId("6235d11e9ec2e26c0c29752c"),
+    comments: [
+      { user: ObjectId("6235d11e9ec2e26c0c29752c"), text: 'text1' },
+      { user: ObjectId("6235d11e9ec2e26c0c29752c"), text: 'text1' }
+    ]
+  }
+
+```
