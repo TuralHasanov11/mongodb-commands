@@ -8,6 +8,7 @@
 - [Show Current Database](#show-current-database)
 - [Show All Databases](#show-all-databases)
 - [Create Or Switch Database](#create-or-switch-database)
+- [Import data to Database](#import-data-to-database)
 - [Drop Database](#drop-database)
 - [Create Collection](#create-collection)
 - [Show Collections](#show-collections)
@@ -28,6 +29,7 @@
 - [Delete a Document](#delete-a-document)
 - [Delete Multiple Documents](#delete-multiple-documents)
 - [Greater & Less Than](#greater--less-than)
+- [Relations](#relations)
 
 ## Check `monosh` Version
 
@@ -65,6 +67,13 @@ use blog
 db.dropDatabase()
 ```
 
+## Import data to Database
+
+```js
+mongoimport datafile.json -d databasename -c collectionname --jsonArray --drop
+// --drop drop if exist, --jsonArray array, collectioname desired table name
+```
+
 ## Create Collection
 
 ```js
@@ -88,6 +97,12 @@ db.posts.insertOne({
   tags: ['news', 'events'],
   date: Date()
 })
+
+// Additional Parameters
+db.posts.insertOne({...}, params) // additional parameters below
+{writeConcern:{w: 1, j: undefined}} // direct store
+{writeConcern:{w: 1, j: true}} // j - storing insert in journal (tasks kept for later)
+{writeConcern:{w: 1, j:true, wtimeout: 200}} // wtimeout - time for server to report successful insert
 ```
 
 ## Insert Multiple Documents
