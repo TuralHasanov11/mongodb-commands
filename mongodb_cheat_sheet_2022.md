@@ -214,7 +214,14 @@ db.data.find({ $or:  [{"pressure.value":1029.2}, {"dewPoint.value":-29.8}]} )
 
 // NOT
 db.data.find({ "pressure.value": {$not: {$gt: 1029.2}}})
+```
 
+## Evaluation Query
+```js
+// regex
+db.data.find({ type: {$regex: /FM/}})
+
+// expr
 ```
 
 ## Element Query 
