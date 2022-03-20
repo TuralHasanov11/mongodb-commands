@@ -126,7 +126,7 @@ db.posts.insertMany([
     tags: ['news', 'events'],
     date: Date()
   }
-])
+], {ordered:false}) // ordered default is true
 ```
 
 ## Find All Documents
