@@ -201,6 +201,29 @@ db.posts.find().limit(2).sort({ title: 1 })
 
 ```js
 db.posts.findOne({ likes: { $gt: 3 } })
+db.posts.findOne({ "rating.average": { $gt: 3 } }) // nested document
+// $gt, $gte, $lt, $lte, $eq, $ne, $in, $nin
+
+db.posts.find({column:"hey"}) // if column is array, then it should include the word "hey", not exactly equal to "hey"
+```
+
+## Logical Operators
+```js
+// AND, OR, NOR
+db.data.find({ $or:  [{"pressure.value":1029.2}, {"dewPoint.value":-29.8}]} )
+
+// NOT
+db.data.find({ "pressure.value": {$not: {$gt: 1029.2}}})
+
+```
+
+## Element Query 
+```js
+// $exists - checks if field exists
+db.data.findOne({ "pressure.value":{$exists:true, $gt:1030}})
+
+// $type - checks if field data type is the given BSON type (number, float, string ...)
+db.data.findOne({ "pressure.value":{$type:"number"}})
 ```
 
 ## Update Document
