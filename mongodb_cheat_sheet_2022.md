@@ -1,6 +1,6 @@
 # MongoDB Cheat Sheet 2022
 
-> MongoDB Crash Course 2022 < TODO: Add Video Link
+> Follow my channel
 
 ## Table of Contents
 - [Check `monosh` Version](#check-monosh-version)
