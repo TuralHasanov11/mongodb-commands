@@ -233,6 +233,12 @@ db.data.findOne({ "pressure.value":{$exists:true, $gt:1030}})
 db.data.findOne({ "pressure.value":{$type:"number"}})
 ```
 
+## Array
+```js
+// $all - finds data equal to exact array, but order of array elements are not important
+db.data.find({ "sections":{$all:["abc","abd"]}})
+```
+
 ## Update Document
 
 ```js
