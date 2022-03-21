@@ -358,9 +358,17 @@ db.posts.updateMany({
 })
 
 // updating specific elements of array
-db.posts.updateMany({...},
+db.posts.updateMany({},
   { $set: { "sections.$[el].newField": true }}, 
   { arrayFilters: [{"el.frequency":{$gt:2}}] }) 
+
+// adding element to array, data - {...} (Object) 
+db.posts.updateOne({}, { $push: { sections: {...} } }), 
+db.posts.updateOne({}, { $push: { sections: { $each:[{...}, {...}], $sort:{column:1}}} }) 
+
+// remove element from array
+db.posts.updateOne({}, { $pull: { sections: { column:"value" } } })
+db.posts.updateOne({}, { $pop: { sections: 1 } } ) // remove last (1) or first (-1) element
 ```
 
 ## Delete a Document
