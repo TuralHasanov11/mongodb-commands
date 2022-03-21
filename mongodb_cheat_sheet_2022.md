@@ -300,6 +300,18 @@ db.posts.updateOne({ title: 'Post 1' },
 })
 ```
 
+## Min- Max - Mul Field (`$min`, `$max`, `$mul`)
+
+```js
+// $min sets field to new value if new value is lower than original value
+// $max sets field to new value if new value is greater than original value
+// $mul multiplies field with given input
+
+db.posts.updateOne({ title: 'Post 1' },{ $min: { likes: 2 }})
+db.posts.updateOne({ title: 'Post 1' },{ $max: { likes: 2 }})
+db.posts.updateOne({ title: 'Post 1' },{ $mul: { likes: 2 }})
+```
+
 ## Update Multiple Documents
 
 ```js
