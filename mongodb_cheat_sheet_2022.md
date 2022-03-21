@@ -169,13 +169,18 @@ db.posts.find({ category: 'News' })
 ### Ascending
 
 ```js
-db.posts.find().sort({ title: 1 })
+db.posts.find().sort({ title: 1})
 ```
 
 ### Descending
 
 ```js
 db.posts.find().sort({ title: -1 })
+```
+
+### Multiple field sort
+```js
+db.posts.find().sort({ title: 1, rating:-1 })
 ```
 
 ## Count Documents
@@ -237,6 +242,20 @@ db.data.findOne({ "pressure.value":{$type:"number"}})
 ```js
 // $all - finds data equal to exact array, but order of array elements are not important
 db.data.find({ "sections":{$all:["abc","abd"]}})
+db.posts.find().forEach(data=>{printjson(data)}) // better than toArray() for large datasets, not loading data at once
+```
+
+## Cursor
+```js
+const data = db.data.find()
+data.next()
+data.hasNext() // checks if data has next cursor
+```
+
+## Skip and Limit
+```js
+db.data.find().skip(100).limit(10) // skip first 100 documents (rows) and get 10 documents
+
 ```
 
 ## Update Document
