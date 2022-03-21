@@ -259,7 +259,6 @@ data.hasNext() // checks if data has next cursor
 ## Skip and Limit
 ```js
 db.data.find().skip(100).limit(10) // skip first 100 documents (rows) and get 10 documents
-
 ```
 
 ## Update Document
@@ -312,6 +311,18 @@ db.posts.updateOne({ title: 'Post 1' },{ $max: { likes: 2 }})
 db.posts.updateOne({ title: 'Post 1' },{ $mul: { likes: 2 }})
 ```
 
+## Getting rid of field
+
+```js
+db.posts.updateMany({}, { $unset: { likes: ""} }) // removes field from document if field is equal to given input
+```
+
+## Rename field
+
+```js
+db.posts.updateMany({}, { $rename: { rating: "totalRating"} })
+```
+
 ## Update Multiple Documents
 
 ```js
@@ -329,6 +340,19 @@ db.posts.updateOne({ title: 'Post 2' },
 {
   $rename: {
     likes: 'views'
+  }
+})
+```
+
+## Updating Arrays
+
+```js
+db.posts.updateMany({
+  sections:{$elemMatch: {title:"title 1", rating:{$gte:3}}}
+},
+{
+  $set: {
+    "sections.$.newField": true // updating exactly one column
   }
 })
 ```
