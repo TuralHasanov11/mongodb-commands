@@ -347,14 +347,20 @@ db.posts.updateOne({ title: 'Post 2' },
 ## Updating Arrays
 
 ```js
+// updating exactly one column
 db.posts.updateMany({
   sections:{$elemMatch: {title:"title 1", rating:{$gte:3}}}
 },
 {
   $set: {
-    "sections.$.newField": true // updating exactly one column
+    "sections.$.newField": true 
   }
 })
+
+// updating specific elements of array
+db.posts.updateMany({...},
+  { $set: { "sections.$[el].newField": true }}, 
+  { arrayFilters: [{"el.frequency":{$gt:2}}] }) 
 ```
 
 ## Delete a Document
