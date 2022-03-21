@@ -156,6 +156,10 @@ db.posts.find().forEach(data=>{printjson(data)}) // better than toArray() for la
 
 ```js
 db.posts.find({}, {title:1}) // {title:1} means include, {title:0} means exclude 'title' column
+db.posts.find({}, {"sections.$":1}) // array projection
+db.posts.find({}, {sections:{$elemMatch:{$eq:"AG1"}}}) // array projection will include 'sections' field if section has "AG1"
+db.posts.find({}, {sections:{$slice:[1,2]}}) // skipping 1st element and getting 2 elements of array
+
 ```
 
 ## Find Documents with Query
