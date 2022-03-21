@@ -385,6 +385,12 @@ db.posts.deleteOne({ title: 'Post 6' })
 db.posts.deleteMany({ category: 'Tech' })
 ```
 
+## Delete all documents
+
+```js
+db.posts.drop()
+```
+
 ## Greater & Less Than
 
 ```js
