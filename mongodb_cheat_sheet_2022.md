@@ -365,6 +365,8 @@ db.posts.updateMany({},
 // adding element to array, data - {...} (Object) 
 db.posts.updateOne({}, { $push: { sections: {...} } }), 
 db.posts.updateOne({}, { $push: { sections: { $each:[{...}, {...}], $sort:{column:1}}} }) 
+db.posts.updateOne({}, { $addToSet: { sections: {...} }) // adds distinct elment, no dublicate
+
 
 // remove element from array
 db.posts.updateOne({}, { $pull: { sections: { column:"value" } } })
