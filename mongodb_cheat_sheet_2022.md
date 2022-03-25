@@ -448,7 +448,10 @@ db.posts.aggregate([{
 db.data.explain().find()
 
 // Execution details - time, success etc.
-db.data.explain('executionStats).find()
+db.data.explain('executionStats').find()
+
+// Execution details of all indexes.
+db.data.explain('allPlansExecution').find()
 
 /* Look at:  
   Milliseconds Proccess Time
@@ -477,6 +480,7 @@ db.data.createIndex({"airTemperature.value":1}) // Sort ascending
 
 // Delete Index
 db.data.dropIndex({"airTemperature.value":1})
+db.data.dropIndex("airTemperature.value_1") // delete by Index name
 
 // Compound Index - Merging 
 db.data.dropIndex({"airTemperature.value":1, type:"FM-13"})
@@ -499,5 +503,12 @@ db.data.createIndex({"st":1}, {unique:true, partialFilterExpression:{st:{$exists
 // Time to live index - Specifing expiration time for documents, works only with 'date' objects and has to be single index
 db.data.createIndex({"created_at":1}, {expireAfterSeconds:1000}) // document will be deleted after 1000 seconds
 
+// Text Index
+db.data.createIndex({callLetters:"text"})
+db.data.find({$text:{$search:"search value"}}) // "search" and "value" treated seperately
+db.data.find({$text:{$search:"\"search value\""}}) // "search" and "value" treated together
+db.data.find({$text:{$search:"\"search value\""}}).sort({score:{$meta:"textScore"}}) // sorting by text search result relevancy
+// Combined text search
+db.data.createIndex({callLetters:"text", type:"text"})
 
 ```
