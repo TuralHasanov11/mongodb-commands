@@ -527,3 +527,39 @@ db.data.find({$text:{$search:"value", $caseSensitive:true, $language:"turkish"}}
 */
 db.data.createIndex({"airTemperature.value":1}, {background:true})
 ```
+
+## Geospatial Data
+```js
+// long: 41.021091025785985, lat: 29.00475194715994
+db.data.insertOne({location:{type:"Point", coordinates:[41.021091025785985, 29.00475194715994]}})
+db.data.createIndex({location:"2dsphere"}) // create index for spotting geo data
+db.data.find({location:{ $near: { $geometry: {type:"Point", coordinates:[41.021091025785985,29.00475194715994]}, $maxDistance:30, $minDistance:10}}}) // limiting the radius of area with max and min distances
+
+// Get all data within the radius of location. Difference from $near is that near does not sort data
+db.data.find({location:{ $geoWithin: { $centerSphere: [[41.021091025785985,29.00475194715994], 1/6378.1]}}}) // radius 1 km
+
+// Finding documents having location within the area specified coordinates
+db.data.find({location:{ $geoWithin: { $geometry: {type:"Polygon", coordinates:[[
+  [41.021166, 29.003985],
+  [41.021021, 29.004008],
+  [41.021199, 29.004230],
+  [41.021043, 29.004255],
+  [41.021166, 29.003985]
+ ]]}}}}) 
+ 
+ // Storing area
+ db.data.inserOne({location:{ $geoWithin: { $geometry: {type:"Polygon", coordinates:[[
+  [41.021166, 29.003985],
+  [41.021021, 29.004008],
+  [41.021199, 29.004230],
+  [41.021043, 29.004255],
+  [41.021166, 29.003985]
+ ]]}}}}) 
+ 
+db.data.createIndex({area:"2dsphere"}) // create index for spotting area
+// Finding doc having the coordinates intersecting with the area
+db.data.find({area:{$geoIntersects:{$geometry:{type:"Point", coordinates:[41.021091025785985, 29.00475194715994]}}}})
+
+
+```
+
