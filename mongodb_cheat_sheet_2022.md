@@ -441,3 +441,63 @@ db.posts.aggregate([{
   }
 
 ```
+
+## Query Diagnosis and Query Planning
+```js
+// Details of query
+db.data.explain().find()
+
+// Execution details - time, success etc.
+db.data.explain('executionStats).find()
+
+/* Look at:  
+  Milliseconds Proccess Time
+  IXSCAN vs COLLSCAN
+  # of Keys Examined
+  # of Documents Examined
+  # of Documents Returned
+  
+  keys and examined docs should be close, examined and returned docs should be close
+ */
+```
+
+## Indexes
+```js
+/* ### For getting minority (lower than 20-30% of all data), indexes are useful, 
+but for getting majority of data indexes are slower. 
+For very large data Collection Scan (default) is better than Index scan. 
+
+Features:
+  1. Reducing time
+  2. Useful for sorting (collection scan will timeout if data is large)
+### */
+
+// Create Index
+db.data.createIndex({"airTemperature.value":1}) // Sort ascending
+
+// Delete Index
+db.data.dropIndex({"airTemperature.value":1})
+
+// Compound Index - Merging 
+db.data.dropIndex({"airTemperature.value":1, type:"FM-13"})
+
+// View all indexes 
+db.data.getIndexes() // It will always show default index (index for ID) along with other indexes
+
+// Configuring Indexes
+db.data.createIndex({"st":1}, {unique:true}) // Unique index, no duplicate will be allowed
+
+// Partial Index - Create index for documents only meeting specified standard
+// Apply index to documents having "type" column equal to "FM-13" 
+db.data.createIndex({"airTemperature.value":1}, {partialFilterExpression:{type:"FM-13"}}) 
+// Making query for partial index. Compound index size is smaller than this Partial index
+db.data.find({"airTemperature.value":18, type:"FM-13"}) 
+
+// Applying unique index for documents where specified column exists
+db.data.createIndex({"st":1}, {unique:true, partialFilterExpression:{st:{$exists:true}}})
+
+// Time to live index - Specifing expiration time for documents, works only with 'date' objects and has to be single index
+db.data.createIndex({"created_at":1}, {expireAfterSeconds:1000}) // document will be deleted after 1000 seconds
+
+
+```
