@@ -508,7 +508,15 @@ db.data.createIndex({callLetters:"text"})
 db.data.find({$text:{$search:"search value"}}) // "search" and "value" treated seperately
 db.data.find({$text:{$search:"\"search value\""}}) // "search" and "value" treated together
 db.data.find({$text:{$search:"\"search value\""}}).sort({score:{$meta:"textScore"}}) // sorting by text search result relevancy
+
 // Combined text search
 db.data.createIndex({callLetters:"text", type:"text"})
 
+// Exclude some words. Putting - in front of the word
+db.data.find({$text:{$search:"-value"}})
+
+// Language settings and weights
+// Language is german and "callLetters" is 10 times important than "type"
+db.data.createIndex({callLetters:"text", type:"text"}, {default_language:"german", weights:{type:1, callLetters:10}})
+db.data.find({$text:{$search:"value", $caseSensitive:true, $language:"turkish"}}) // case sensitive and turkish search
 ```
