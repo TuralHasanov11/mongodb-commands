@@ -519,4 +519,11 @@ db.data.find({$text:{$search:"-value"}})
 // Language is german and "callLetters" is 10 times important than "type"
 db.data.createIndex({callLetters:"text", type:"text"}, {default_language:"german", weights:{type:1, callLetters:10}})
 db.data.find({$text:{$search:"value", $caseSensitive:true, $language:"turkish"}}) // case sensitive and turkish search
+
+
+/* Adding Index in Background. 
+  Foreground Indexing locks the collection (not able to query database) until Indexing is completed. 
+  Background Index is useful production, as it does not lock the collection
+*/
+db.data.createIndex({"airTemperature.value":1}, {background:true})
 ```
