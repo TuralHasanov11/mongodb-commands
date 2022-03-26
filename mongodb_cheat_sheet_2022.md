@@ -708,4 +708,8 @@ use admin
 db.createUser({user:"Raiden", pwd:"password", roles:["userAdminAnyDatabase"]})
 ```
 
-
+## Capped Collections
+```js
+// Creating capped collection with 10000 bytes size, and maximum 5 documents
+db.createCollection("capped", {capped:true, size: 10000, max: 5})
+```
