@@ -1,4 +1,4 @@
-# MongoDB Cheat Sheet 2022
+# MongoDB Cheat Sheet
 
 > Follow my channel - https://www.youtube.com/channel/UCvE-1xbTsOH_Kstd8PJdiXQ
 
