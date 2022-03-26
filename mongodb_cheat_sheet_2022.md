@@ -444,6 +444,10 @@ db.posts.aggregate([{
 
 ## Query Diagnosis and Query Planning
 ```js
+
+// Statistics
+db.data.stats()
+
 // Details of query
 db.data.explain().find()
 
@@ -686,4 +690,19 @@ db.data.aggregate([
   {$limit:10}
 ])
 ```
+
+## Numbers
+```js
+// Int(32), Int(64), Double, Double(128)
+db.data.insertOne({age:NumberInt("29")}) // Inserting int(32)
+db.data.insertOne({age:NumberLong("29")}) // Inserting int(64)
+db.data.insertOne({age:NumberDecimal("29.121")}) // Inserting double(128)
+
+```
+
+## Authentication & Authorization
+```js
+
+```
+
 
