@@ -23,9 +23,9 @@ db.posts.insertOne({
 ```
 
 ## Insert Document with additional parameters
-> Some insert operations takes a considerable amount of time which can exceed the maximum allowed time for this operation. 
-> In order to implement these heavy operations, we have to store them in `Journal` (kind of a secondary memory) where they are kept for later submission.
-> `writeConcern` has `w` (write), `j` (journal), `wtimeout` (time for server to report successful insert)
+> - Some insert operations takes a considerable amount of time which can exceed the maximum allowed time for this operation. 
+> - In order to implement these heavy operations, we have to store them in `Journal` (kind of a secondary memory) where they are kept for later submission.
+> - `writeConcern` has `w` (write), `j` (journal), `wtimeout` (time for server to report successful insert)
 ```js
 {writeConcern:{w: 1, j: undefined}} // direct store
 {writeConcern:{w: 1, j: true}} // j - storing insert in journal
