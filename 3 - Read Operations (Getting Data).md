@@ -2,7 +2,7 @@
 
 > Follow my channel - https://www.youtube.com/channel/UCvE-1xbTsOH_Kstd8PJdiXQ
 
-## 3 - Database and Collection operations
+## 3 - Read Operations (Getting Data)
 
 ## Table of Contents
 - [Find All Documents](#find-all-documents)
