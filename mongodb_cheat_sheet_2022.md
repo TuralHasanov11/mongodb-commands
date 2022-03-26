@@ -721,7 +721,8 @@ const session = db.getMongo().startSession()
 session.startTransaction()
 
 // Assigning session for collection of the database
-const dataC = session.getDatabases("sample_weatherdata").data
+const dataC = session.getDatabase("sample_weatherdata").data
 dataC.deleteMany() // operation on collection session. Original collection is not affected
 session.commitTransaction() // completing the session. Original collection is affected
+session.abortTransaction() // abort the session. Original collection is not affected
 ```
