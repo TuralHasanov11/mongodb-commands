@@ -559,7 +559,26 @@ db.data.find({location:{ $geoWithin: { $geometry: {type:"Polygon", coordinates:[
 db.data.createIndex({area:"2dsphere"}) // create index for spotting area
 // Finding doc having the coordinates intersecting with the area
 db.data.find({area:{$geoIntersects:{$geometry:{type:"Point", coordinates:[41.021091025785985, 29.00475194715994]}}}})
+```
 
+## Aggregation
+```js
+db.data.aggregate([
+  { $match: { type:"FM-13"} },
+  { $group: { _id: {temperature: "$airTemperature.value"}, totalTemperature: {$sum: 1} } },
+  { $sort: { totalTemperature: -1} }
+])
 
+db.data.aggregate([{ $project: { 
+    position:1, 
+    name: {
+      $concat:[
+        { $toUpper: {$substrCP:["$st", 0, 1]}}, 
+        { $substrCP:["$st", 1, {$subtract:[{$strLenCP:"$st"},1]} ]}, 
+        " ", 
+        "$type"
+      ]}} 
+  },
+])
 ```
 
