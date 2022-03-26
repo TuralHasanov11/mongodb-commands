@@ -3,7 +3,7 @@
 > Follow my channel - https://www.youtube.com/channel/UCvE-1xbTsOH_Kstd8PJdiXQ
 
 ## Table of Contents
-- [Check `monosh` Version](#check-monosh-version)
+- [Check `mongosh` Version](#check-monosh-version)
 - [Start the Mongo Shell](#start-the-mongo-shell)
 - [Show Current Database](#show-current-database)
 - [Show All Databases](#show-all-databases)
@@ -46,6 +46,7 @@ mongoimport datafile.json -d databasename -c collectionname --jsonArray --drop
 ```
 
 ## Drop Database
+#### Delete database
 ```js
 db.dropDatabase()
 ```
