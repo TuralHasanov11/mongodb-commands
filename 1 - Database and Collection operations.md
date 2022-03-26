@@ -1,6 +1,6 @@
 # MongoDB Cheat Sheet 2022
 
-> Follow my channel - https://www.youtube.com/channel/UCvE-1xbTsOH_Kstd8PJdiXQ
+> Follow my channel - [https://www.youtube.com/channel/UCvE-1xbTsOH_Kstd8PJdiXQ](url)
 
 ## Table of Contents
 - [Check `mongosh` Version](#check-monosh-version)
