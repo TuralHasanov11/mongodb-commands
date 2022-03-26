@@ -526,6 +526,9 @@ db.data.find({$text:{$search:"value", $caseSensitive:true, $language:"turkish"}}
   Background Index is useful production, as it does not lock the collection
 */
 db.data.createIndex({"airTemperature.value":1}, {background:true})
+
+// Geolocation index
+db.data.createIndex({position:"2dsphere"})
 ```
 
 ## Geospatial Data
@@ -594,6 +597,7 @@ db.data.aggregate([
         "$type"
       ]}} 
   },
+  { $out: "transformedWeatherData" } // write to new collection
 ])
 
 // Arrays
@@ -654,6 +658,32 @@ db.data.aggregate([
       }
     } 
   }
+])
+
+db.data.aggregate([
+  { $match: { type: "FM-13" } },
+  { 
+    $project: {
+    st:{ $concat: ["$st", " ", "$type"]},
+    date:{ $toDate:"$ts" }
+  }},
+  { $sort: { date:1 } },
+  { $skip: 10 },
+  { $limit: 10 }
+])
+
+// Geo data
+db.data.createIndex({position:"2dsphere"})
+db.data.aggregate([
+  { 
+    $geoNear: { 
+      near:{ type:"Point", coordinates:[-171, 79]},
+      maxDistance: 100000,
+      query: { type:"FM-13" },
+      distanceField: "geo_distance"
+    },
+  },
+  {$limit:10}
 ])
 ```
 
