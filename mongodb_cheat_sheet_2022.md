@@ -596,6 +596,7 @@ db.data.aggregate([
   },
 ])
 
+// Arrays
 db.data.aggregate([
   { $group: { _id: {temperature: "$airTemperature.value"}, allSections: {$push: "$sections"} } },
 ])
@@ -611,6 +612,47 @@ db.data.aggregate([
       sections: { $slice: ["$sections", 2, 3]},
       sectionsCount: { $size:"$sections" }
     },
+  }
+])
+
+db.restaurants.aggregate([
+  { 
+    $project: { 
+      grades: { $filter: { input:"$grades", as:"grade", cond:{$gt:["$$grade.score", 10]}}},
+    },
+  }
+])
+
+db.restaurants.aggregate([
+  { $unwind: "$grades" },
+  { $project: { score: "$grades.score",  borough:1}},
+  { $sort: { "grades": 1 }},
+  { $group: { _id: "$_id", borough:{ $first: "$borough" } ,maxScore:{$max:"$score"} }},
+  { $sort: { maxScore:-1 }}
+])
+
+db.data.aggregate([
+  { 
+    $bucket: { 
+      groupBy: "$airTemperature.value",
+      boundaries:[0, 7, 9, 20],
+      output:{
+        avgTemperature:{ $avg: "$airTemperature.value"},
+      },
+      default:-100
+    } 
+  }
+])
+
+db.data.aggregate([
+  { 
+    $bucketAuto: { 
+      groupBy: "$airTemperature.value",
+      buckets:5,
+      output:{
+        avgTemperature:{ $avg: "$airTemperature.value"},
+      }
+    } 
   }
 ])
 ```
