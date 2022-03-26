@@ -13,7 +13,7 @@
 - [Create Collection](#create-collection)
 - [Show Collections](#show-collections)
 
-## Check `monosh` Version
+## Check `mongosh` Version
 ```js
 mongosh --version
 ```
