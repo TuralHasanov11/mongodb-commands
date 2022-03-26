@@ -595,5 +595,23 @@ db.data.aggregate([
       ]}} 
   },
 ])
+
+db.data.aggregate([
+  { $group: { _id: {temperature: "$airTemperature.value"}, allSections: {$push: "$sections"} } },
+])
+
+db.data.aggregate([
+  { $unwind: "$sections"},
+  { $group: { _id: {temperature: "$airTemperature.value"}, allSections: {$addToSet: "$sections"} } },
+])
+
+db.data.aggregate([
+  { 
+    $project: { 
+      sections: { $slice: ["$sections", 2, 3]},
+      sectionsCount: { $size:"$sections" }
+    },
+  }
+])
 ```
 
