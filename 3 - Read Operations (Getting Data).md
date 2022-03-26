@@ -24,10 +24,10 @@
 
 
 ## Find All Documents
-> We can get all the documents by calling `toArray()` method along with `find()` method.
-> `forEach()` method is better than `toArray()` in terms of getting large datasets, because it does not load the data at once.
-> However, it is not a good approach to get all the documents, because it would heavily load the server. Thus `find()` method gets certain amount data with `cursor`.
-> We can get the next chunk of data by calling `next()` method to current cursor. 
+> - We can get all the documents by calling `toArray()` method along with `find()` method.
+> - `forEach()` method is better than `toArray()` in terms of getting large datasets, because it does not load the data at once.
+> - However, it is not a good approach to get all the documents, because it would heavily load the server. Thus `find()` method gets certain amount data with `cursor`.
+> - We can get the next chunk of data by calling `next()` method to current cursor. 
 ```js
 db.posts.find() // with cursor in 20th element
 db.posts.find().next() // next chunk of documents
@@ -50,8 +50,8 @@ db.posts.findOne({ "rating.average": 3 }) // nested document
 ```
 
 ## Sort Documents
-> Setting sorted field to 1 means ascending, 0 means descending order
-> We can sort documents according to multiple fields. Order matters
+> - Setting sorted field to 1 means ascending, 0 means descending order
+> - We can sort documents according to multiple fields. Order matters
 ### Ascending
 ```js
 db.posts.find().sort({ title: 1})
@@ -134,8 +134,8 @@ db.data.find({ type: {$regex: /FM/}})
 ```
 
 ## Element Query 
-> `$exists` - checks if field exists
-> `$type` - checks if field data type is the given BSON type (number, float, string ...)
+> - `$exists` - checks if field exists
+> - `$type` - checks if field data type is the given BSON type (number, float, string ...)
 ```js
 db.data.findOne({ "pressure.value":{$exists:true, $gt:1030}})
 db.data.findOne({ "pressure.value":{$type:"number"}})
@@ -149,8 +149,8 @@ db.posts.find().forEach(data=>{printjson(data)}) // better than toArray() for la
 ```
 
 ## Cursor
-> `next()` - next chunk of data
-> `hasNext()` - checks if data has next cursor
+> - `next()` - next chunk of data
+> - `hasNext()` - checks if data has next cursor
 ```js
 const data = db.data.find()
 data.next()
