@@ -713,3 +713,15 @@ db.createUser({user:"Raiden", pwd:"password", roles:["userAdminAnyDatabase"]})
 // Creating capped collection with 10000 bytes size, and maximum 5 documents
 db.createCollection("capped", {capped:true, size: 10000, max: 5})
 ```
+
+## Transactions - Session
+```js
+// Starting session
+const session = db.getMongo().startSession()
+session.startTransaction()
+
+// Assigning session for collection of the database
+const dataC = session.getDatabases("sample_weatherdata").data
+dataC.deleteMany() // operation on collection session. Original collection is not affected
+session.commitTransaction() // completing the session. Original collection is affected
+```
