@@ -16,7 +16,7 @@
 
 
 ## Update Document
-> `Sset` parameter is used to update fields
+> `Sset` parameter is used to update fields.
 ```js
 db.posts.updateOne({ title: 'Post 1' },
 {
@@ -27,7 +27,7 @@ db.posts.updateOne({ title: 'Post 1' },
 ```
 
 ## Update Document or Insert if does not exist
-> `upsert` parameter is used to update existing document or insert new document if does not exist
+> `upsert` parameter is used to update existing document or insert new document if does not exist.
 ```js
 db.posts.updateOne({ title: 'Post 6' },
 {
@@ -43,16 +43,16 @@ db.posts.updateOne({ title: 'Post 6' },
 ```
 
 ## Increment Field 
-> `$inc` - incerement field by given input
-> `$mul` - multiplies field with given input
+> `$inc` - incerement field by given input.
+> `$mul` - multiplies field with given input.
 ```js
 db.posts.updateOne({ title: 'Post 1' }, { $inc: { likes: 2 // incerement likes by 2 }})
 db.posts.updateOne({ title: 'Post 1' },{ $mul: { likes: 2 }}) // multiple likes by 2
 ```
 
 ## Min - Max
-> `$min` - sets field to new value if new value is lower than original value
-> `$max` - sets field to new value if new value is greater than original value
+> `$min` - sets field to new value if new value is lower than original value.
+> `$max` - sets field to new value if new value is greater than original value.
 ```js
 db.posts.updateOne({ title: 'Post 1' },{ $min: { likes: 2 }}) // sets likes to 2 if likes is greater than 2
 db.posts.updateOne({ title: 'Post 1' },{ $max: { likes: 2 }}) // sets likes to 2 if likes is lower than 2
@@ -79,11 +79,11 @@ db.posts.updateMany({}, { $rename: { rating: "totalRating"} })
 ```
 
 ## Updating Arrays
-> `arrayFilters` - filters elements (nested documents) of array that satisfy the query
-> `$push` - add element to array (possible element duplicates)
-> `$addToSet` - add distinct elment, no dublicate
-> `$pull` - remove element from array
-> `$pop` - remove last (1) or first (-1) element of array
+> `arrayFilters` - filters elements (nested documents) of array that satisfy the query.
+> `$push` - add element to array (possible element duplicates).
+> `$addToSet` - add distinct elment, no dublicate.
+> `$pull` - remove element from array.
+> `$pop` - remove last (1) or first (-1) element of array.
 ```js
 // updating exactly one column
 db.posts.updateMany({
