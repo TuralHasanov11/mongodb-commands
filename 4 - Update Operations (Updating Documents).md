@@ -79,11 +79,11 @@ db.posts.updateMany({}, { $rename: { rating: "totalRating"} })
 ```
 
 ## Updating Arrays
-> -`arrayFilters` - filters elements (nested documents) of array that satisfy the query.
-> -`$push` - add element to array (possible element duplicates).
-> -`$addToSet` - add distinct elment, no dublicate.
-> -`$pull` - remove element from array.
-> -`$pop` - remove last (1) or first (-1) element of array.
+> - `arrayFilters` - filters elements (nested documents) of array that satisfy the query.
+> - `$push` - add element to array (possible element duplicates).
+> - `$addToSet` - add distinct elment, no dublicate.
+> - `$pull` - remove element from array.
+> - `$pop` - remove last (1) or first (-1) element of array.
 ```js
 // updating exactly one column
 db.posts.updateMany({
