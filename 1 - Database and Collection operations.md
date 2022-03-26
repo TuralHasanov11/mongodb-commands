@@ -1,7 +1,8 @@
 # MongoDB Cheat Sheet 2022
-# 1 - Database and Collection operations
 
 > Follow my channel - https://www.youtube.com/channel/UCvE-1xbTsOH_Kstd8PJdiXQ
+
+## 1 - Database and Collection operations
 
 ## Table of Contents
 - [Check `mongosh` Version](#check-monosh-version)
