@@ -12,9 +12,9 @@
 > For performance Look at:  
 > - Milliseconds Proccess Time
 > - IXSCAN vs COLLSCAN
-> - # of Keys Examined
-> - # of Documents Examined
-> - # of Documents Returned  
+> - number of Keys Examined
+> - number of Documents Examined
+> - number of Documents Returned  
 > - keys and examined docs should be close, examined and returned docs should be close
 ```js
 // Statistics
