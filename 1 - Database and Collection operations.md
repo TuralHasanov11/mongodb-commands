@@ -34,7 +34,7 @@ show dbs
 ```
 
 ## Create Or Switch Database
-#### Creates new database and starts using it if does not exist, or uses already existing database
+> Creates new database and starts using it if does not exist, or uses already existing database
 ```js
 use blog
 ```
@@ -46,7 +46,7 @@ mongoimport datafile.json -d databasename -c collectionname --jsonArray --drop
 ```
 
 ## Drop Database
-#### Delete database
+> Delete database
 ```js
 db.dropDatabase()
 ```
