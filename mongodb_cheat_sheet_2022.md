@@ -702,7 +702,10 @@ db.data.insertOne({age:NumberDecimal("29.121")}) // Inserting double(128)
 
 ## Authentication & Authorization
 ```js
+db.auth('username', 'password')
 
+use admin
+db.createUser({user:"Raiden", pwd:"password", roles:["userAdminAnyDatabase"]})
 ```
 
 
