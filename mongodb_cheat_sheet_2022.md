@@ -718,11 +718,14 @@ db.createCollection("capped", {capped:true, size: 10000, max: 5})
 ```js
 // Starting session
 const session = db.getMongo().startSession()
-session.startTransaction()
 
 // Assigning session for collection of the database
 const dataC = session.getDatabase("sample_weatherdata").data
-dataC.deleteMany() // operation on collection session. Original collection is not affected
+
+// Starting
+session.startTransaction()
+
+dataC.deleteOne({type:"FM-13"}) // operation on collection session. Original collection is not affected
 session.commitTransaction() // completing the session. Original collection is affected
 session.abortTransaction() // abort the session. Original collection is not affected
 ```
