@@ -34,6 +34,7 @@ show dbs
 ```
 
 ## Create Or Switch Database
+#### Creates new database and starts using it if does not exist, or uses already existing database
 ```js
 use blog
 ```
