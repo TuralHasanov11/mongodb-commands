@@ -569,8 +569,23 @@ db.data.aggregate([
   { $sort: { totalTemperature: -1} }
 ])
 
-db.data.aggregate([{ $project: { 
-    position:1, 
+db.data.aggregate([
+  { $project: { 
+    ts:1, 
+    st:1,
+    type:1,
+    position:{
+      type:"Point", 
+      coordinates:[
+        {$convert: {input:{$arrayElemAt: [ "$position.coordinates", 0 ]}, to:"double", onError:0, onNull:0}}, 
+        {$convert: {input:{$arrayElemAt: [ "$position.coordinates", 1 ]}, to:"double", onError:0, onNull:0}}, 
+      ]
+    },
+    date:{ $toDate:"$ts" }
+  }},
+  { $project: {
+    position:1,
+    date:1,
     name: {
       $concat:[
         { $toUpper: {$substrCP:["$st", 0, 1]}}, 
