@@ -43,8 +43,8 @@ db.posts.updateOne({ title: 'Post 6' },
 ```
 
 ## Increment Field 
-> `$inc` - incerement field by given input.
-> `$mul` - multiplies field with given input.
+> - `$inc` - incerement field by given input.
+> - `$mul` - multiplies field with given input.
 ```js
 db.posts.updateOne({ title: 'Post 1' }, { $inc: { likes: 2 // incerement likes by 2 }})
 db.posts.updateOne({ title: 'Post 1' },{ $mul: { likes: 2 }}) // multiple likes by 2
